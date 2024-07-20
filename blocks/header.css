@@ -1,17 +1,10 @@
 .header {
-  width: 880px;
-  height: 74px;
-  top: 45px;
-  left: 200px;
-  gap: 0px;
+  margin-top: 45px;
   border-bottom: 1px solid #545454;
 }
 
-.header_title {
-  position: absolute;
-  top: 45px;
-  left: 200px;
-  height: 173px;
-  width: 33px;
-  color: #ffffff;
+.header__title {
+  height: 33px;
+  width: 173px;
+  margin-bottom: 41px;
 }
