@@ -3,12 +3,11 @@
   flex-direction: column;
   border-radius: 10px;
   list-style-type: none;
+  overflow: hidden;
 }
 
 .cards {
   margin-top: 51px;
-  padding: 0 0 36px;
-  /* fonts */
 }
 
 .card__list {
@@ -53,3 +52,17 @@
   border: none;
   cursor: pointer;
 }
+
+.card__like-button:hover {
+  opacity: 30%;
+  transition: opacity 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 580px) {
+  .cards {
+    margin-top: 36px;
+  }
+}
+
+/*why does card media work in cards.css but not in original?
+why does header media only work in original and not in header.css?*/

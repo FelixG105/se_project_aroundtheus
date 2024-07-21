@@ -1,10 +1,13 @@
 .header {
-  margin-top: 45px;
   border-bottom: 1px solid #545454;
+  max-width: 880px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
 }
 
-.header__title {
+.header__logo {
   height: 33px;
   width: 173px;
-  margin-bottom: 41px;
+  margin: 45px 0 41px;
 }

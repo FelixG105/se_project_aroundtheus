@@ -44,6 +44,11 @@
   padding: 0;
 }
 
+.profile__edit-button:hover {
+  opacity: 30%;
+  transition: opacity 0.4s ease-in-out;
+}
+
 .profile__subtitle {
   font-size: 18px;
   line-height: 1.2;
@@ -58,12 +63,18 @@
   height: 50px;
   width: 150px;
   margin-left: auto;
+  padding: 0;
   background: transparent url(../images/AddButton.svg) center no-repeat;
   cursor: pointer;
   border: 1px solid #fff;
 }
 
-@media screen and (max-width: 480px) {
+.profile__add-button:hover {
+  opacity: 30%;
+  transition: opacity 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 580px) {
   .page__section {
     max-width: 282px;
     width: 100%;
@@ -74,8 +85,11 @@
   .header {
     padding-top: 28px;
   }
-  .header__title {
-    margin-bottom: 32px;
+
+  .header__logo {
+    height: 24px;
+    width: 124px;
+    margin: 0 0 32px 27px;
   }
 
   .profile {
@@ -92,6 +106,7 @@
     justify-content: center;
     width: 100%;
     margin: 30px 0 36px;
+    position: relative;
   }
 
   .profile__title {
@@ -101,24 +116,29 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    /*title and edit button doesn't match up to figma design. Appears center but shouldn't be?*/
   }
 
   .profile__subtitle {
     width: 100%;
     text-align: center;
-    /*Confirm top margin or padding is correct*/
+    padding-top: 7px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
   }
 
   .profile__edit-button {
     height: 18px;
     width: 18px;
+    position: absolute;
+    top: 4px;
+    right: 15px;
   }
 
   .profile__add-button {
     margin: 0;
     width: 100%;
   }
-
-  /*.cards does not allow me to alter or reset top margin.*/
 }
