@@ -20,6 +20,7 @@
     "subtitle subtitle";
   grid-template-columns: minmax(auto, 375px) auto;
   grid-gap: 7px 18px;
+  padding-right: 20px;
 }
 .profile__title {
   font-size: 42px;
@@ -75,25 +76,9 @@
 }
 
 @media screen and (max-width: 580px) {
-  .page__section {
-    max-width: 282px;
-    width: 100%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .header {
-    padding-top: 28px;
-  }
-
-  .header__logo {
-    height: 24px;
-    width: 124px;
-    margin: 0 0 32px 27px;
-  }
-
   .profile {
     flex-direction: column;
+    padding: 40px 0 0;
   }
 
   .profile__avatar {
@@ -134,7 +119,7 @@
     width: 18px;
     position: absolute;
     top: 4px;
-    right: 15px;
+    right: 34px;
   }
 
   .profile__add-button {
