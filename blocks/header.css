@@ -23,3 +23,9 @@
     padding: 0 0 32px;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .header__logo {
+    margin-left: 19px;
+  }
+}
