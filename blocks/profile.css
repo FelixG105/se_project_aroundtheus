@@ -46,7 +46,7 @@
 }
 
 .profile__edit-button:hover {
-  opacity: 30%;
+  opacity: 60%;
   transition: opacity 0.4s ease-in-out;
 }
 
@@ -67,11 +67,11 @@
   padding: 0;
   background: transparent url(../images/AddButton.svg) center no-repeat;
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
 }
 
 .profile__add-button:hover {
-  opacity: 30%;
+  opacity: 60%;
   transition: opacity 0.4s ease-in-out;
 }
 
@@ -96,18 +96,12 @@
 
   .profile__title {
     font-size: 22px;
-    font-weight: 500;
     line-height: 1.2;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
 
   .profile__subtitle {
     width: 100%;
-    text-align: center;
     padding-top: 7px;
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.2;
