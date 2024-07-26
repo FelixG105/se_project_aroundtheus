@@ -41,6 +41,6 @@
 }
 
 .card__like-button:hover {
-  opacity: 60%;
+  opacity: 50%;
   transition: opacity 0.4s ease-in-out;
 }
