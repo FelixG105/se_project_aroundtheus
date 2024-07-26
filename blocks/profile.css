@@ -93,6 +93,7 @@
     justify-content: center;
     width: 100%;
     margin: 30px 0 36px;
+    padding: 0;
     position: relative;
   }
 
@@ -114,7 +115,7 @@
     width: 18px;
     position: absolute;
     top: 4px;
-    right: 34px;
+    right: 15px;
   }
 
   .profile__add-button {
