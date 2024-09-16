@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const initialCards = [
   {
     title: "Yosemite Valley",
@@ -16,3 +17,6 @@ const initialCards = [
 ];
 
 console.log(initialCards);
+=======
+console.log("Hello");
+>>>>>>> 9e2add1647e2df0089cec7f51e558a01d18e788e
