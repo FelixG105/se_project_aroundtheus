@@ -45,22 +45,26 @@
     </div>
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
-        <p class="modal__heading">Edit Profile</p>
+        <button
+          type="button"
+          class="modal__close"
+          id="modal-close-button"
+        ></button>
+        <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form">
           <input
-            class="modal__input modal__input_title"
+            class="modal__input modal__input-title"
             type="text"
             id="profile-title-input"
             name="title"
-            placeholder="Jacques Cousteau"
+            placeholder="Your name"
           />
           <input
-            class="modal__input modal__input_subtitle"
+            class="modal__input modal__input-subtitle"
             type="text"
             id="profile-subtitle-input"
             name="subtitle"
-            placeholder="Explorer"
+            placeholder="Your description"
           />
           <button class="modal__button">Save</button>
         </form>
