@@ -69,14 +69,25 @@ function openPopup(modal) {
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
-
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardAltEl = cardElement.querySelector(".card__title");
-  //set the path to the image to the link field of the object
+  const likeButton = cardElement.querySelector(".card__like-button");
+  // find delete button
+
+  // add the event listener to the delete button
+  //carElement.remove();
+  // add click listener to the cardImage element
+  // openModal with previewImageModal
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
   cardImageEl.src = cardData.link;
   cardAltEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
+
   return cardElement;
 }
 
@@ -94,12 +105,6 @@ function handleProfileEditSubmit(e) {
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
-
-/*profileEditBtn.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileSubtitleInput.value = profileSubtitle.textContent;
-  profileEditModal.classList.add("modal_opened");
-});*/
 
 editModalForm.addEventListener("submit", handleProfileEditSubmit);
 profileEditBtn.addEventListener("click", () => {
