@@ -82,14 +82,25 @@ function getCardElement(cardData) {
   // find delete button
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
 
+  const previewImageModal = document.querySelector("#preview-image-modal");
+  const previewTitleEl = previewImageModal.querySelector(".modal__title");
+  const previewImageEl = previewImageModal.querySelector(".modal__image");
+  const previewModalCloseButton =
+    previewImageModal.querySelector(".modal_close");
+
   // add the event listener to the delete button
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove();
   });
 
   // add click listener to the cardImage element
-
   // openModal with previewImageModal
+  cardImageEl.addEventListener("click", () => {
+    openPopup(previewImageModal);
+    previewImageEl.src = cardData.link;
+    previewAltEl.alt = cardData.name;
+    previewTitleEl.textContent = cardData.name;
+  });
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
@@ -139,9 +150,11 @@ profileEditBtn.addEventListener("click", () => {
   profileSubtitleInput.value = profileSubtitle.textContent;
   openPopup(profileEditModal);
 });
+
 profileModalCloseBtn.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
+
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
