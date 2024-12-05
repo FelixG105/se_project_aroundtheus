@@ -78,17 +78,18 @@ function getCardElement(cardData) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardAltEl = cardElement.querySelector(".card__title");
+
+  // Card Buttons
+
   const likeButton = cardElement.querySelector(".card__like-button");
-  // find delete button
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
 
+  // Preview Image Modal
   const previewImageModal = document.querySelector("#preview-image-modal");
   const previewTitleEl = previewImageModal.querySelector(".modal__title");
   const previewImageEl = previewImageModal.querySelector(".modal__image");
-  const previewModalCloseButton =
-    previewImageModal.querySelector(".modal_close");
+  const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
 
-  // add the event listener to the delete button
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove();
   });
@@ -104,6 +105,10 @@ function getCardElement(cardData) {
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
+  });
+
+  previewModalCloseBtn.addEventListener("click", () => {
+    closePopup(previewImageModal);
   });
 
   cardImageEl.src = cardData.link;
