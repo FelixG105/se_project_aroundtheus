@@ -8,8 +8,9 @@
   z-index: 99;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s 2s, opacity 2s ease-in-out;
+  transition: visibility 0s 1s, opacity 0.5s ease-in-out;
   padding: 19px;
+  display: flex;
 }
 
 .modal_opened {
