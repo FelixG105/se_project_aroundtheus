@@ -40,7 +40,6 @@
   box-sizing: border-box;
   background-color: transparent;
   justify-content: center;
-  display: flex;
   padding: 0;
 }
 
@@ -51,18 +50,12 @@
 }
 
 .modal__image_title {
-  font-family: Inter;
-  color: #fff;
+  font-family: Inter, sans-serif;
   font-size: 12px;
   font-weight: 400;
-  line-height: 14.52px;
-  text-align: left;
-  position: absolute;
-  top: calc(100%);
-  right: calc(100%);
-  border: none;
-  background-color: transparent;
-  outline: none;
+  line-height: 1.2;
+  max-width: 291px;
+  max-height: 12px;
 }
 
 .modal__close {
@@ -164,5 +157,15 @@
 
   .modal__button {
     font-size: 14px;
+  }
+
+  .modal__container_type_preview {
+    width: auto;
+    padding: 0;
+  }
+
+  .modal__close-button_type_preview {
+    bottom: calc(100% + 5px);
+    left: calc(100% + 5px);
   }
 }

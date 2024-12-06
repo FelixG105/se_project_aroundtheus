@@ -51,7 +51,7 @@ const addNewCardBtn = document.querySelector(".profile__add-button");
 
 // Preview Image Modal
 const previewImageModal = document.querySelector("#preview-image-modal");
-const previewTitleEl = previewImageModal.querySelector(".modal__image-title");
+const previewTitleEl = previewImageModal.querySelector(".modal__image_title");
 const previewImageEl = previewImageModal.querySelector(".modal__image");
 const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
 
@@ -155,6 +155,12 @@ profileEditBtn.addEventListener("click", () => {
 profileModalCloseBtn.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
+
+previewImageModal.addEventListener("click", () => {
+  previewTitleEl.value = previewTitleEl.textContent;
+  openPopup(previewImageModal);
+  closePopup(previewImageModal);
+});
 
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
