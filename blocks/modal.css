@@ -6,12 +6,16 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 99;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s ease-in-out;
   padding: 19px;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
 }
 
 .modal__container {
@@ -22,15 +26,8 @@
   position: relative;
   width: 430px;
   box-sizing: border-box;
-  transition: opacity 1s ease-out, visibility 0s linear 1s;
+  transition: opacity 1s ease-in-out, visibility 0s linear 1s;
   opacity: 0;
-  visibility: hidden;
-}
-
-.modal__container.open {
-  opacity: 1; // Visible
-  visibility: visible; // Visible
-  transition-delay: 0s;
 }
 
 .modal__container_type_preview {
