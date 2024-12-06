@@ -49,6 +49,12 @@ const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 
+// Preview Image Modal
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewTitleEl = previewImageModal.querySelector(".modal__image-title");
+const previewImageEl = previewImageModal.querySelector(".modal__image");
+const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
+
 // Form Data
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileSubtitleInput = document.querySelector("#profile-subtitle-input");
@@ -80,26 +86,16 @@ function getCardElement(cardData) {
   const cardAltEl = cardElement.querySelector(".card__title");
 
   // Card Buttons
-
   const likeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-
-  // Preview Image Modal
-  const previewImageModal = document.querySelector("#preview-image-modal");
-  const previewTitleEl = previewImageModal.querySelector(".modal__title");
-  const previewImageEl = previewImageModal.querySelector(".modal__image");
-  const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
 
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove();
   });
 
-  // add click listener to the cardImage element
-  // openModal with previewImageModal
   cardImageEl.addEventListener("click", () => {
     openPopup(previewImageModal);
     previewImageEl.src = cardData.link;
-    previewAltEl.alt = cardData.name;
     previewTitleEl.textContent = cardData.name;
   });
 
