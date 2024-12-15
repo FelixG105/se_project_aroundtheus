@@ -30,7 +30,7 @@
   box-sizing: border-box;
 }
 
-.modal__container-type_preview {
+.modal__container_type_preview {
   margin: auto;
   position: relative;
   width: auto;
@@ -49,7 +49,7 @@
   max-width: 75vw;
 }
 
-.modal__image-title {
+.modal__title {
   font-family: Inter, sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -159,12 +159,12 @@
     font-size: 14px;
   }
 
-  .modal__container-type_preview {
+  .modal__container_type_preview {
     width: auto;
     padding: 0;
   }
 
-  .modal__close-button_type_preview {
+  .modal__close_type_preview {
     bottom: calc(100% + 5px);
     left: calc(100% + 5px);
   }
