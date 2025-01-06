@@ -59,14 +59,22 @@
             id="profile-title-input"
             name="title"
             placeholder="Your name"
+            required
+            minlength="2"
+            maxlength="40"
           />
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             class="modal__input modal__input_subtitle"
             type="text"
             id="profile-subtitle-input"
             name="subtitle"
             placeholder="Your description"
+            required
+            minlength="2"
+            maxlength="200"
           />
+          <span class="modal__error" id="profile-subtitle-input-error"></span>
           <button class="modal__button">Save</button>
         </form>
       </div>
@@ -121,5 +129,6 @@
       </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
