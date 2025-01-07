@@ -35,6 +35,8 @@ const initialCards = [
 /* --------------------------------------------*/
 
 //  Wrappers
+const modal = document.querySelector(".modal");
+const openedModal = document.querySelector(".modal_opened");
 const cardListEl = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -134,6 +136,17 @@ function handleAddCardSubmit(e) {
   closePopup(addCardModal);
 }
 
+function escCloseModal(evt) {
+  if (evt.key === "Escape") {
+    console.log(evt.key);
+    closePopup(evt.target);
+  }
+}
+
+modal.forEach((openedModal) => {
+  modal.addEventListener("keydown", escCloseModal);
+});
+
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
@@ -167,3 +180,5 @@ addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+// Close overlay
