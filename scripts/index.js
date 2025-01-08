@@ -73,9 +73,9 @@ const cardTemplate =
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  if (modal === addCardModal) {
-    addCardModalForm.reset();
-  }
+  //if (modal === addCardModal) {
+  //  addCardModalForm.reset();   <--- not necessary
+  //}
 }
 
 function openPopup(modal) {
