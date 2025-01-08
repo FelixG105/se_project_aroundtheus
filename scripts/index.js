@@ -35,8 +35,6 @@ const initialCards = [
 /* --------------------------------------------*/
 
 //  Wrappers
-const modal = document.querySelector(".modal");
-const openedModal = document.querySelector(".modal_opened");
 const cardListEl = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -136,17 +134,6 @@ function handleAddCardSubmit(e) {
   closePopup(addCardModal);
 }
 
-function escCloseModal(evt) {
-  if (evt.key === "Escape") {
-    console.log(evt.key);
-    closePopup(evt.target);
-  }
-}
-
-modal.forEach((openedModal) => {
-  modal.addEventListener("keydown", escCloseModal);
-});
-
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
@@ -181,4 +168,23 @@ addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
-// Close overlay
+// Close modal with Escape and Click
+const modals = document.querySelectorAll(".modal");
+
+function escCloseModal(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closePopup(openedModal);
+    }
+  }
+}
+
+modals.forEach((modal) => {
+  document.addEventListener("keydown", escCloseModal);
+  modal.addEventListener("click", (evt) => {
+    if (evt.target === modal) {
+      closePopup(modal);
+    }
+  });
+});
