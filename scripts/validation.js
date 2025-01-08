@@ -3,7 +3,7 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   inputEl.classList.add(inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
-  console.log(validationMessage);
+  // console.log(inputEl.validationMessage);
 }
 
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
@@ -25,6 +25,7 @@ function hasInvalidInput(inputList) {
 }
 
 function toggleButtonState(inputEls, submitBtn, { inactiveButtonClass }) {
+  console.log(hasInvalidInput(inputEls));
   if (hasInvalidInput(inputEls)) {
     submitBtn.classList.add(inactiveButtonClass);
     submitBtn.disabled = true;
