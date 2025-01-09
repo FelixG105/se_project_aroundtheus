@@ -80,6 +80,7 @@ function closePopup(modal) {
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalEsc);
 }
 
 function getCardElement(cardData) {
@@ -174,7 +175,7 @@ initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 // Close modal with Escape and Click
 const modals = document.querySelectorAll(".modal");
 
-function escCloseModal(evt) {
+function closeModalEsc(evt) {
   if (evt.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
@@ -184,7 +185,6 @@ function escCloseModal(evt) {
 }
 
 modals.forEach((modal) => {
-  document.addEventListener("keydown", escCloseModal);
   modal.addEventListener("click", (evt) => {
     if (evt.target === modal) {
       closePopup(modal);
