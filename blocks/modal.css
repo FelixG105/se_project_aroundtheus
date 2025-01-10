@@ -98,6 +98,12 @@
   color: #000000;
 }
 
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .modal__input {
   padding: 0 0 13px;
   color: #000;
@@ -158,6 +164,8 @@
   font-family: Inter, sans-serif;
   font-size: 12px;
   line-height: 1.2;
+  position: absolute;
+  top: calc(100% + 5px);
 }
 
 @media screen and (max-width: 600px) {
