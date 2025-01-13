@@ -76,6 +76,7 @@ function closePopup(modal) {
   //if (modal === addCardModal) {
   //  addCardModalForm.reset();   <--- not necessary
   //}
+  document.removeEventListener("keydown", closeModalEsc);
 }
 
 function openPopup(modal) {

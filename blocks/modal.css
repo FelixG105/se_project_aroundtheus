@@ -98,6 +98,7 @@
   color: #000000;
 }
 
+/*<----allows positioning for single line only?-->*/
 .modal__label {
   display: flex;
   flex-direction: column;
