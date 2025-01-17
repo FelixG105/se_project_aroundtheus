@@ -1,4 +1,5 @@
 import Card from "./card.js";
+import FormValidator from "./FormValidator.js";
 
 const initialCards = [
   {
@@ -93,6 +94,24 @@ function openPopup(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalEsc);
 }
+
+/* --------------------------------------------*/
+/* ------------------Validation----------------*/
+/* --------------------------------------------*/
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(validationSettings, editModalForm);
+const addFormValidator = new FormValidator(
+  validationSettings,
+  addCardModalForm
+);
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
