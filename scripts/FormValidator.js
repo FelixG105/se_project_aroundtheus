@@ -18,7 +18,15 @@ class FormValidator {
 
   _hideInputError() {}
 
-  _toggleButtonState() {}
+  _toggleButtonState() {
+    if (_hasInvalidInput(inputEls)) {
+      this._submitBtn.classList.add(this._inactiveButtonClass);
+      this._submitBtn.disabled = true;
+      return;
+    }
+    this._submitBtn.classList.remove(inactiveButtonClass);
+    this._submitBtn.disabled = false;
+  }
 
   _hasInvalidInput() {}
 
@@ -40,9 +48,8 @@ class FormValidator {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
     });
+    setEventListeners(formEl, options);
   }
 }
-const editFormValidator = new FormValidator();
-editFormValidator.enableValidation();
 
 export default FormValidator;

@@ -33,14 +33,6 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
-const card = new Card(cardData, "#card-template");
-card.getView();
-
 /* --------------------------------------------*/
 /* ------------------Elements------------------*/
 /* --------------------------------------------*/
@@ -84,9 +76,7 @@ const cardTemplate =
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  //if (modal === addCardModal) {
-  //  addCardModalForm.reset();   <--- not necessary
-  //}
+
   document.removeEventListener("keydown", closeModalEsc);
 }
 
@@ -94,6 +84,8 @@ function openPopup(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalEsc);
 }
+
+const cardSelector = "#card-template";
 
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
@@ -113,6 +105,9 @@ const addFormValidator = new FormValidator(
   addCardModalForm
 );
 
+// editFormValidator.enableValidation();
+// addFormValidator.enableValidation();
+
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -122,9 +117,9 @@ function getCardElement(cardData) {
   const likeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
 
-  //  cardDeleteBtn.addEventListener("click", () => {
-  //    cardElement.remove();
-  //  });
+  cardDeleteBtn.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   cardImageEl.addEventListener("click", () => {
     openPopup(previewImageModal);
@@ -149,6 +144,7 @@ function getCardElement(cardData) {
 /* --------------------------------------------*/
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
+  const card = new Card(cardData, cardSelector);
   cardListEl.prepend(cardElement);
 }
 
