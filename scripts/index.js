@@ -143,8 +143,8 @@ function getCardElement(cardData) {
 /* ------------------Event Handlers------------*/
 /* --------------------------------------------*/
 function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
   const card = new Card(cardData, cardSelector);
+  const cardElement = card.getView();
   cardListEl.prepend(cardElement);
 }
 

@@ -1,33 +1,3 @@
-// Preview Image Modal
-const modals = document.querySelectorAll(".modal");
-const previewImageModal = document.querySelector("#preview-image-modal");
-const previewTitleEl = previewImageModal.querySelector(".modal__title");
-const previewImageEl = previewImageModal.querySelector(".modal__image");
-const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
-
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-
-  document.removeEventListener("keydown", closeModalEsc);
-}
-
-function closeModalEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closePopup(openedModal);
-    }
-  }
-}
-
-modals.forEach((modal) => {
-  modal.addEventListener("click", (evt) => {
-    if (evt.target === modal) {
-      closePopup(modal);
-    }
-  });
-});
-
 class Card {
   constructor(cardData, cardSelector) {
     this._name = cardData.name;
@@ -35,23 +5,33 @@ class Card {
 
     this._cardSelector = cardSelector;
   }
+  //!Need help with functions from index.js
+  _openPopup() {
+    this._cardElement.classList.add("modal_opened");
+    this._cardElement.addEventListener("keydown", closeModalEsc);
+  }
+
+  _closePopup() {
+    this._cardElement.classList.remove("modal_opened");
+    this._cardElement.removeEventListener("keydown", closeModalEsc);
+  }
 
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListner("click", () => {
-        this._hanldeLikeIcon();
+      .addEventListener("click", () => {
+        this._handleLikeIcon();
       });
 
     this._cardElement
       .querySelector(".card__delete-button")
-      .addEventListner("click", () => {
+      .addEventListener("click", () => {
         this._handleDeleteCard();
       });
 
     this._cardElement
       .querySelector(".card__image")
-      .addEventListner("click", () => {
+      .addEventListener("click", () => {
         this._handlePreviewPicture();
       });
   }
@@ -61,19 +41,20 @@ class Card {
     this._cardElement = null;
   }
 
-  _hanldeLikeIcon() {
-    this._cardElement
-      .querySelector(".card__like-button")
-      .classList.toggle(".card__like-button_active");
+  _handleLikeIcon() {
+    this._cardElement.classList // .querySelector(".card__like-button")
+      .toggle(".card__like-button_active");
   }
 
   _handlePreviewPicture() {
     this._cardElement
-      .querySelector(".modal__image")
+      .querySelector(".card__image")
       .addEventListener("click", () => {
         previewTitleEl.value = previewTitleEl.textContent;
-        openPopup(previewImageModal);
       });
+    this._cardElement.addEventListener("click", () =>
+      this._openPopup(this._cardElement)
+    );
     this._cardElement.addEventListener("click", () =>
       closePopup(previewImageModal)
     );
@@ -87,18 +68,21 @@ class Card {
   }
 
   getView() {
-    this._element = this._getTenplate();
+    this._cardElement = this._getTemplate();
 
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
-    this._element.querySelector(
-      ".card__image"
-    ).style.backgroundImage = `url(${this._link})`;
-    this._element.querySelector("card.__title").textContent = this._name;
+    // this._cardElement.querySelector(
+    //   ".card__image"
+    // ).style.backgroundImage = `url(${this._link})`;
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._cardTitle = this._cardElement.querySelector(".card__title");
+
+    this._cardImage.src = this._link;
+    this._cardTitle.textContent = this._name;
+    this._cardImage.alt = this._name;
 
     this._setEventListeners();
+
+    return this._cardElement;
   }
 }
 
