@@ -66,9 +66,7 @@ const cardTitleInput = addCardModalForm.querySelector(
   ".modal__input_type_title"
 );
 const cardUrlInput = addCardModalForm.querySelector(".modal__input_type_url");
-
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+const cardSelector = "#card-template";
 
 /* --------------------------------------------*/
 /* ------------------Functions-----------------*/
@@ -76,7 +74,6 @@ const cardTemplate =
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-
   document.removeEventListener("keydown", closeModalEsc);
 }
 
@@ -85,7 +82,16 @@ function openPopup(modal) {
   document.addEventListener("keydown", closeModalEsc);
 }
 
-const cardSelector = "#card-template";
+function handleCardImageClick(name, link) {
+  // set the correct image in the preview image modal
+  previewImageEl.src = link;
+  // set the coorect text in the caption for the image modal
+  previewTitleEl.textContent = name;
+  //set the alt...
+  previewImageEl.alt = name;
+  // open the preview image modal
+  openPopup(previewImageModal);
+}
 
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
@@ -105,45 +111,42 @@ const addFormValidator = new FormValidator(
   addCardModalForm
 );
 
-// editFormValidator.enableValidation();
-// addFormValidator.enableValidation();
+// function getCardElement(cardData) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImageEl = cardElement.querySelector(".card__image");
+//   const cardTitleEl = cardElement.querySelector(".card__title");
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
+//   // Card Buttons
+//   const likeButton = cardElement.querySelector(".card__like-button");
+//   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
 
-  // Card Buttons
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
+//   cardDeleteBtn.addEventListener("click", () => {
+//     cardElement.remove();
+//   });
 
-  cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
+//   cardImageEl.addEventListener("click", () => {
+//     openPopup(previewImageModal);
+//     previewImageEl.src = cardData.link;
+//     previewImageEl.alt = cardData.name;
+//     previewTitleEl.textContent = cardData.name;
+//   });
 
-  cardImageEl.addEventListener("click", () => {
-    openPopup(previewImageModal);
-    previewImageEl.src = cardData.link;
-    previewImageEl.alt = cardData.name;
-    previewTitleEl.textContent = cardData.name;
-  });
+//   likeButton.addEventListener("click", () => {
+//     likeButton.classList.toggle("card__like-button_active");
+//   });
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+//   cardImageEl.src = cardData.link;
+//   cardImageEl.alt = cardData.name;
+//   cardTitleEl.textContent = cardData.name;
 
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-  cardTitleEl.textContent = cardData.name;
-
-  return cardElement;
-}
+//   return cardElement;
+// }
 
 /* --------------------------------------------*/
 /* ------------------Event Handlers------------*/
 /* --------------------------------------------*/
 function renderCard(cardData) {
-  const card = new Card(cardData, cardSelector);
+  const card = new Card(cardData, cardSelector, handleCardImageClick);
   const cardElement = card.getView();
   cardListEl.prepend(cardElement);
 }
@@ -184,13 +187,13 @@ profileModalCloseBtn.addEventListener("click", () =>
 );
 
 // Preview Image
-previewImageEl.addEventListener("click", () => {
-  previewTitleEl.value = previewTitleEl.textContent;
-  openPopup(previewImageModal);
-});
-previewModalCloseBtn.addEventListener("click", () =>
-  closePopup(previewImageModal)
-);
+// previewImageEl.addEventListener("click", () => {
+//   previewTitleEl.value = previewTitleEl.textContent;
+//   openPopup(previewImageModal);
+// });
+// previewModalCloseBtn.addEventListener("click", () =>
+//   closePopup(previewImageModal)
+// );
 
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
