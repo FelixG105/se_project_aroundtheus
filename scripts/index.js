@@ -111,36 +111,8 @@ const addFormValidator = new FormValidator(
   addCardModalForm
 );
 
-// function getCardElement(cardData) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const cardImageEl = cardElement.querySelector(".card__image");
-//   const cardTitleEl = cardElement.querySelector(".card__title");
-
-//   // Card Buttons
-//   const likeButton = cardElement.querySelector(".card__like-button");
-//   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-
-//   cardDeleteBtn.addEventListener("click", () => {
-//     cardElement.remove();
-//   });
-
-//   cardImageEl.addEventListener("click", () => {
-//     openPopup(previewImageModal);
-//     previewImageEl.src = cardData.link;
-//     previewImageEl.alt = cardData.name;
-//     previewTitleEl.textContent = cardData.name;
-//   });
-
-//   likeButton.addEventListener("click", () => {
-//     likeButton.classList.toggle("card__like-button_active");
-//   });
-
-//   cardImageEl.src = cardData.link;
-//   cardImageEl.alt = cardData.name;
-//   cardTitleEl.textContent = cardData.name;
-
-//   return cardElement;
-// }
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 /* --------------------------------------------*/
 /* ------------------Event Handlers------------*/
@@ -186,15 +158,6 @@ profileModalCloseBtn.addEventListener("click", () =>
   closePopup(profileEditModal)
 );
 
-// Preview Image
-// previewImageEl.addEventListener("click", () => {
-//   previewTitleEl.value = previewTitleEl.textContent;
-//   openPopup(previewImageModal);
-// });
-// previewModalCloseBtn.addEventListener("click", () =>
-//   closePopup(previewImageModal)
-// );
-
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
@@ -202,7 +165,7 @@ addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 // Close modal with Escape and Click
-const modals = document.querySelectorAll(".modal");
+// const modals = document.querySelectorAll(".modal");
 
 function closeModalEsc(evt) {
   if (evt.key === "Escape") {
@@ -213,10 +176,10 @@ function closeModalEsc(evt) {
   }
 }
 
-modals.forEach((modal) => {
-  modal.addEventListener("click", (evt) => {
-    if (evt.target === modal) {
-      closePopup(modal);
-    }
-  });
-});
+// modals.forEach((modal) => {
+//   modal.addEventListener("click", (evt) => {
+//     if (evt.target === modal) {
+//       closePopup(modal);
+//     }
+//   });
+// });
