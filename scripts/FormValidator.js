@@ -23,13 +23,12 @@ class FormValidator {
     errorMessageEl.classList.remove(this._errorClass);
   }
 
-  _toggleButtonState(inputEls, submitBtn) {
+  _toggleButtonState(inputEls) {
+    const submitBtn = this._form.querySelector(".modal__button");
     if (this._hasInvalidInput(inputEls)) {
       submitBtn.classList.add(this._inactiveButtonClass);
       submitBtn.disabled = true;
-      return;
-    }
-    {
+    } else {
       submitBtn.classList.remove(this._inactiveButtonClass);
       submitBtn.disabled = false;
     }
