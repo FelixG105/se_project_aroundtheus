@@ -93,6 +93,15 @@ function handleCardImageClick(name, link) {
   openPopup(previewImageModal);
 }
 
+// previewImageEl.addEventListener("click", () => {
+//   previewTitleEl.value = previewTitleEl.textContent;
+//   openPopup(previewImageModal);
+// });
+
+previewModalCloseBtn.addEventListener("click", () =>
+  closePopup(previewImageModal)
+);
+
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
 /* --------------------------------------------*/
@@ -164,8 +173,8 @@ addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
-// Close modal with Escape and Click
-// const modals = document.querySelectorAll(".modal");
+// // Close modal with Escape and Click
+const modals = document.querySelectorAll(".modal");
 
 function closeModalEsc(evt) {
   if (evt.key === "Escape") {
@@ -176,10 +185,10 @@ function closeModalEsc(evt) {
   }
 }
 
-// modals.forEach((modal) => {
-//   modal.addEventListener("click", (evt) => {
-//     if (evt.target === modal) {
-//       closePopup(modal);
-//     }
-//   });
-// });
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target === modal) {
+      closePopup(modal);
+    }
+  });
+});

@@ -23,14 +23,15 @@ class FormValidator {
     errorMessageEl.classList.remove(this._errorClass);
   }
 
-  _toggleButtonState() {
-    if (!this._submitBtn) {
-      this._submitBtn.classList.add(this._inactiveButtonClass);
+  _toggleButtonState(inputEls, submitBtn) {
+    if (this._hasInvalidInput(inputEls)) {
+      submitBtn.classList.add(this._inactiveButtonClass);
+      submitBtn.disabled = true;
       return;
     }
     {
-      this._submitBtn.classList.remove(this._inactiveButtonClass);
-      this._submitBtn.disabled = false;
+      submitBtn.classList.remove(this._inactiveButtonClass);
+      submitBtn.disabled = false;
     }
   }
   _hasInvalidInput() {
