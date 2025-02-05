@@ -41,8 +41,8 @@ const initialCards = [
 const cardListEl = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
-const editModalForm = profileEditModal.querySelector(".modal__form");
-const addCardModalForm = addCardModal.querySelector(".modal__form");
+const editModalForm = document.forms["edit-profile-form"];
+const addCardModalForm = document.forms["add-card-form"];
 
 //  Buttons  and other DOM nodes
 const profileEditBtn = document.querySelector("#profile-edit-button");
@@ -126,9 +126,14 @@ addFormValidator.enableValidation();
 /* --------------------------------------------*/
 /* ------------------Event Handlers------------*/
 /* --------------------------------------------*/
-function renderCard(cardData) {
+
+function getCardElement(cardData) {
   const card = new Card(cardData, cardSelector, handleCardImageClick);
-  const cardElement = card.getView();
+  return card.getView();
+}
+
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
 }
 
