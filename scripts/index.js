@@ -98,10 +98,6 @@ function handleCardImageClick(name, link) {
 //   openPopup(previewImageModal);
 // });
 
-previewModalCloseBtn.addEventListener("click", () =>
-  closePopup(previewImageModal)
-);
-
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
 /* --------------------------------------------*/
@@ -122,6 +118,31 @@ const addFormValidator = new FormValidator(
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+
+// define an object for storing validators
+// const formValidators = {};
+
+// const enableValidation = (validationSettings) => {
+//   const formList = Array.from(
+//     document.querySelectorAll(validationSettings.formSelector)
+//   );
+//   formList.forEach((formElement) => {
+//     const validator = new FormValidator(validationSettings, formElement);
+//     // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
+
+//     const editModalForm = formElement.getAttribute("name");
+//     const addCardForm = formElement.getAttribute("name");
+
+//     // Here you store the validator using the `name` of the form
+//     formValidators[addCardForm] = validator;
+//     formValidators[editModalForm] = validator;
+//     validator.enableValidation();
+//   });
+// };
+
+// enableValidation(validationSettings);
+
+// formValidators["add-card-form"].resetValidation();
 
 /* --------------------------------------------*/
 /* ------------------Event Handlers------------*/
@@ -168,13 +189,9 @@ profileEditBtn.addEventListener("click", () => {
   profileSubtitleInput.value = profileSubtitle.textContent;
   openPopup(profileEditModal);
 });
-profileModalCloseBtn.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
 
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => openPopup(addCardModal));
-addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
@@ -197,3 +214,21 @@ modals.forEach((modal) => {
     }
   });
 });
+
+const closeButtons = document.querySelectorAll(".modal__close");
+
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+
+  button.addEventListener("click", () => closePopup(popup));
+});
+
+// addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
+
+// profileModalCloseBtn.addEventListener("click", () =>
+//   closePopup(profileEditModal)
+// );
+
+// previewModalCloseBtn.addEventListener("click", () =>
+//   closePopup(previewImageModal)
+// );

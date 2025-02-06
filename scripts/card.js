@@ -7,7 +7,6 @@ class Card {
   }
 
   _setEventListeners() {
-    this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._likeButton.addEventListener("click", () => {
       this._handleLikeIcon();
     });
@@ -43,6 +42,7 @@ class Card {
     this._cardElement = this._getTemplate();
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle = this._cardElement.querySelector(".card__title");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
 
     this._cardImage.src = this._link;
     this._cardTitle.textContent = this._name;
