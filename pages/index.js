@@ -158,8 +158,6 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileSubtitle.textContent = profileSubtitleInput.value;
   closePopup(profileEditModal);
-  // formValidators["edit-profile"].resetValidation();
-  // formValidators["edit-profile"].disableButton();
 }
 
 function handleAddCardSubmit(e) {
@@ -169,7 +167,6 @@ function handleAddCardSubmit(e) {
   renderCard({ name, link }, cardListEl);
   e.target.reset();
   closePopup(addCardModal);
-  formValidators["add-card"].resetValidation();
   formValidators["add-card"].disableButton();
 }
 /* --------------------------------------------*/
@@ -186,6 +183,7 @@ profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileSubtitleInput.value = profileSubtitle.textContent;
   openPopup(profileEditModal);
+  formValidators["edit-profile"].resetValidation();
 });
 
 // Add New Card Button
