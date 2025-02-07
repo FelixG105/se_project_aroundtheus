@@ -108,7 +108,7 @@ const validationSettings = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
-  formSelector: [editModalForm, addCardModalForm],
+  formSelector: ".modal__form",
 };
 
 // const editFormValidator = new FormValidator(validationSettings, editModalForm);
@@ -125,7 +125,7 @@ const validationSettings = {
 const formValidators = {};
 
 const enableValidation = (validationSettings) => {
-  const formList = validationSettings.formSelector;
+  const formList = document.querySelectorAll(validationSettings.formSelector);
   formList.forEach((formElement) => {
     const validator = new FormValidator(validationSettings, formElement);
     // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
@@ -172,7 +172,6 @@ function handleAddCardSubmit(e) {
   formValidators["add-card"].resetValidation();
   formValidators["add-card"].disableButton();
 }
-
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
