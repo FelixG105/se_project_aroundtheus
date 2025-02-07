@@ -108,41 +108,36 @@ const validationSettings = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
+  formSelector: [editModalForm, addCardModalForm],
 };
 
-const editFormValidator = new FormValidator(validationSettings, editModalForm);
-const addFormValidator = new FormValidator(
-  validationSettings,
-  addCardModalForm
-);
+// const editFormValidator = new FormValidator(validationSettings, editModalForm);
+// const addFormValidator = new FormValidator(
+//   validationSettings,
+//   addCardModalForm
+// );
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+// editFormValidator.enableValidation();
+// addFormValidator.enableValidation();
 
 // define an object for storing validators
-// const formValidators = {};
 
-// const enableValidation = (validationSettings) => {
-//   const formList = Array.from(
-//     document.querySelectorAll(validationSettings.formSelector)
-//   );
-//   formList.forEach((formElement) => {
-//     const validator = new FormValidator(validationSettings, formElement);
-//     // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
+const formValidators = {};
 
-//     const editModalForm = formElement.getAttribute("name");
-//     const addCardForm = formElement.getAttribute("name");
+const enableValidation = (validationSettings) => {
+  const formList = validationSettings.formSelector;
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationSettings, formElement);
+    // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
+    const formName = formElement.getAttribute("name");
 
-//     // Here you store the validator using the `name` of the form
-//     formValidators[addCardForm] = validator;
-//     formValidators[editModalForm] = validator;
-//     validator.enableValidation();
-//   });
-// };
+    // Here you store the validator using the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-// enableValidation(validationSettings);
-
-// formValidators["add-card-form"].resetValidation();
+enableValidation(validationSettings);
 
 /* --------------------------------------------*/
 /* ------------------Event Handlers------------*/
@@ -163,6 +158,8 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileSubtitle.textContent = profileSubtitleInput.value;
   closePopup(profileEditModal);
+  // formValidators["edit-profile"].resetValidation();
+  // formValidators["edit-profile"].disableButton();
 }
 
 function handleAddCardSubmit(e) {
@@ -172,6 +169,8 @@ function handleAddCardSubmit(e) {
   renderCard({ name, link }, cardListEl);
   e.target.reset();
   closePopup(addCardModal);
+  formValidators["add-card"].resetValidation();
+  formValidators["add-card"].disableButton();
 }
 
 /* --------------------------------------------*/
