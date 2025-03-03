@@ -1,6 +1,11 @@
 import "./pages/index.css";
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
+import Popup from "./components/Popup.js";
+import Section from "./components/Section.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithForm from "./components/PopupWithForm.js";
+import UserInfo from "./components/UserInfo.js";
 
 const initialCards = [
   {
@@ -69,6 +74,10 @@ const cardTitleInput = addCardModalForm.querySelector(
 const cardUrlInput = addCardModalForm.querySelector(".modal__input_type_url");
 const cardSelector = "#card-template";
 
+// Pop up
+
+const popupSelector = document.querySelectorAll(".modal");
+
 /* --------------------------------------------*/
 /* ------------------Functions-----------------*/
 /* --------------------------------------------*/
@@ -94,11 +103,6 @@ function handleCardImageClick(name, link) {
   openPopup(previewImageModal);
 }
 
-// previewImageEl.addEventListener("click", () => {
-//   previewTitleEl.value = previewTitleEl.textContent;
-//   openPopup(previewImageModal);
-// });
-
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
 /* --------------------------------------------*/
@@ -111,17 +115,6 @@ const validationSettings = {
   errorClass: "modal__error_visible",
   formSelector: ".modal__form",
 };
-
-// const editFormValidator = new FormValidator(validationSettings, editModalForm);
-// const addFormValidator = new FormValidator(
-//   validationSettings,
-//   addCardModalForm
-// );
-
-// editFormValidator.enableValidation();
-// addFormValidator.enableValidation();
-
-// define an object for storing validators
 
 const formValidators = {};
 
@@ -220,12 +213,36 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-// addCardModalCloseBtn.addEventListener("click", () => closePopup(addCardModal));
+//NOTE - Instantiate Popup Classes
 
-// profileModalCloseBtn.addEventListener("click", () =>
-//   closePopup(profileEditModal)
-// );
+//Popup
+const popup = new Popup(popupSelector);
+popup.setEventListeners();
+popup.open();
 
-// previewModalCloseBtn.addEventListener("click", () =>
-//   closePopup(previewImageModal)
-// );
+//UserInfo Class
+const userInfo = new UserInfo({
+  titleSelector: ".profile__title",
+  subtitleSelector: ".profile__subtitle",
+});
+
+//Section Class
+const section = new Section(
+  { items: initialCards, renderer: () => {} },
+  ".page__section"
+);
+section.renderItems();
+
+// PopupWithImage
+const popupWithImage = new PopupWithImage(
+  popupSelector,
+  previewImageEl,
+  previewTitleEl
+);
+popupWithImage.open();
+
+//PopupWithForm
+const popupWithForm = new PopupWithForm(".modal__form", (inputValues) => {
+  userInfo.setUserInfo(inputValues); // Update user info with form data
+});
+popupWithForm.setEventListeners();

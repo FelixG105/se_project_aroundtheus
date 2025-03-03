@@ -1,25 +1,25 @@
 import Popup from "./Popup.js";
 
-class PopupWithImage extend Popup{
-  constructor() {
+export default class PopupWithImage extends Popup {
+  constructor(popupSelector, image, caption) {
+    super(popupSelector);
+    this._image = image;
+    this._caption = caption;
+  }
 
-  open() {
-    this._cardImage.src = this._link;
-    this._cardTitle.textContent = this._name;
-    this._cardImage.alt = this._name;
+  open(data) {
+    super.open();
+    this._image.src = data.link;
+    this._image.alt = data.name;
+    this._caption.textContent = data.name;
   }
 
   close() {
     super.close();
   }
-
-  s
 }
 
+// // index.js
+// const cardPopup = new PopupWithImage("#preview-image-modal", () => {});
 
-// index.js
-
-
-const cardPopup = new PopupWithImage("#preview-image-modal", ()=> {});
-
-cardPopup.open();
+// cardPopup.open();
