@@ -3,8 +3,8 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
-    this._popupForm = popupSelector._popupForm;
-    this._inputs = popupSelector._inputs;
+    this._popupForm = this._popupElement.querySelector(".modal__form");
+    this._inputs = this._popupElement.querySelectorAll(".modal__input");
     this._handleFormSubmit = handleFormSubmit;
   }
 
@@ -29,7 +29,7 @@ export default class PopupWithForm extends Popup {
 }
 
 // index.js
-const newCardPopup = new PopupWithForm("#add-card-modal", () => {});
+// const newCardPopup = new PopupWithForm("#add-card-modal", () => {});
 
-newCardPopup.open();
-newCardPopup.close();
+// newCardPopup.open();
+// newCardPopup.close();

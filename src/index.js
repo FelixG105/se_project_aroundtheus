@@ -76,8 +76,6 @@ const cardSelector = "#card-template";
 
 // Pop up
 
-const popupSelector = document.querySelectorAll(".modal");
-
 /* --------------------------------------------*/
 /* ------------------Functions-----------------*/
 /* --------------------------------------------*/
@@ -216,15 +214,13 @@ closeButtons.forEach((button) => {
 //NOTE - Instantiate Popup Classes
 
 //Popup
-const popup = new Popup(popupSelector);
-popup.setEventListeners();
-popup.open();
 
 //UserInfo Class
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   subtitleSelector: ".profile__subtitle",
 });
+//userInfo.setUserInfo();
 
 //Section Class
 const section = new Section(
@@ -235,14 +231,20 @@ section.renderItems();
 
 // PopupWithImage
 const popupWithImage = new PopupWithImage(
-  popupSelector,
-  previewImageEl,
-  previewTitleEl
+  "#preview-image-modal",
+  ".modal__image",
+  ".modal__title"
 );
-popupWithImage.open();
 
 //PopupWithForm
-const popupWithForm = new PopupWithForm(".modal__form", (inputValues) => {
-  userInfo.setUserInfo(inputValues); // Update user info with form data
-});
-popupWithForm.setEventListeners();
+const addCardPopupWithForm = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardSubmit
+);
+addCardPopupWithForm.setEventListeners();
+
+const editProfilePopupWithForm = new PopupWithForm(
+  "edit-profile-modal",
+  handleProfileEditSubmit
+);
+editProfilePopupWithForm.setEventListeners();
