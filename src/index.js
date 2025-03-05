@@ -213,8 +213,6 @@ closeButtons.forEach((button) => {
 
 //NOTE - Instantiate Popup Classes
 
-//Popup
-
 //UserInfo Class
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
@@ -229,12 +227,7 @@ const section = new Section(
 );
 section.renderItems();
 
-// PopupWithImage
-const popupWithImage = new PopupWithImage(
-  "#preview-image-modal",
-  ".modal__image",
-  ".modal__title"
-);
+// Popups
 
 //PopupWithForm
 const addCardPopupWithForm = new PopupWithForm(
@@ -244,7 +237,16 @@ const addCardPopupWithForm = new PopupWithForm(
 addCardPopupWithForm.setEventListeners();
 
 const editProfilePopupWithForm = new PopupWithForm(
-  "edit-profile-modal",
+  "#edit-profile-modal",
   handleProfileEditSubmit
 );
 editProfilePopupWithForm.setEventListeners();
+
+// PopupWithImage
+const popupWithImage = new PopupWithImage(
+  "#preview-image-modal",
+  ".modal__image",
+  ".modal__title"
+);
+
+const allPopups = new Popup(".modal");

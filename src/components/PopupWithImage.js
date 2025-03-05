@@ -18,8 +18,3 @@ export default class PopupWithImage extends Popup {
     super.close();
   }
 }
-
-// // index.js
-// const cardPopup = new PopupWithImage("#preview-image-modal", () => {});
-
-// cardPopup.open();
