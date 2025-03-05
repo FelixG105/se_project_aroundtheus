@@ -1,7 +1,6 @@
 import "./pages/index.css";
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
-import Popup from "./components/Popup.js";
 import Section from "./components/Section.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import PopupWithForm from "./components/PopupWithForm.js";
@@ -203,15 +202,13 @@ modals.forEach((modal) => {
   });
 });
 
-const closeButtons = document.querySelectorAll(".modal__close");
+// const closeButtons = document.querySelectorAll(".modal__close");
 
-closeButtons.forEach((button) => {
-  const popup = button.closest(".modal");
+// closeButtons.forEach((button) => {
+//   const popup = button.closest(".modal");
 
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-//NOTE - Instantiate Popup Classes
+//   button.addEventListener("click", () => closePopup(popup));
+// });
 
 //UserInfo Class
 const userInfo = new UserInfo({
@@ -231,22 +228,26 @@ section.renderItems();
 
 //PopupWithForm
 const addCardPopupWithForm = new PopupWithForm(
-  "#add-card-modal",
+  {
+    popupSelector: "#add-card-modal",
+  },
   handleAddCardSubmit
 );
 addCardPopupWithForm.setEventListeners();
 
 const editProfilePopupWithForm = new PopupWithForm(
-  "#edit-profile-modal",
+  {
+    popupSelector: "#edit-modal",
+  },
   handleProfileEditSubmit
 );
 editProfilePopupWithForm.setEventListeners();
 
 // PopupWithImage
-const popupWithImage = new PopupWithImage(
-  "#preview-image-modal",
-  ".modal__image",
-  ".modal__title"
-);
+const popupWithImage = new PopupWithImage({
+  popupSelector: "#preview-image-modal",
+  image: ".modal__image",
+  caption: ".modal__title",
+});
 
-const allPopups = new Popup(".modal");
+popupWithImage.setEventListeners();
