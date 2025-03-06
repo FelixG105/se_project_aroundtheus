@@ -11,7 +11,7 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ title, subtitle }) {
+  setUserInfo(title, subtitle) {
     this._titleElement.textContent = title;
     this._subtitleElement.textContent = subtitle;
   }

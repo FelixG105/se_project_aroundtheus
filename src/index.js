@@ -73,27 +73,6 @@ const cardTitleInput = addCardModalForm.querySelector(
 const cardUrlInput = addCardModalForm.querySelector(".modal__input_type_url");
 const cardSelector = "#card-template";
 
-// Pop up
-
-/* --------------------------------------------*/
-/* ------------------Functions-----------------*/
-/* --------------------------------------------*/
-
-// function closePopup(modal) {
-//   modal.classList.remove("modal_opened");
-//   document.removeEventListener("keydown", closeModalEsc);
-// }
-
-// function openPopup(modal) {
-//   modal.classList.add("modal_opened");
-//   document.addEventListener("keydown", closeModalEsc);
-// }
-
-function handleCardImageClick(name, link) {
-  const data = { name, link };
-  popupWithImage.open(data);
-}
-
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
 /* --------------------------------------------*/
@@ -128,6 +107,11 @@ enableValidation(validationSettings);
 /* ------------------Event Handlers------------*/
 /* --------------------------------------------*/
 
+function handleCardImageClick(name, link) {
+  const data = { name, link };
+  popupWithImage.open(data);
+}
+
 function getCardElement(cardData) {
   const card = new Card(cardData, cardSelector, handleCardImageClick);
   return card.getView();
@@ -143,6 +127,8 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileSubtitle.textContent = profileSubtitleInput.value;
   editProfilePopupWithForm.close();
+  // editProfilePopupWithForm.getUserInfo();
+  // editProfilePopupWithForm.setUserInfo();
 }
 
 function handleAddCardSubmit(e) {
@@ -173,36 +159,7 @@ profileEditBtn.addEventListener("click", () => {
 
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => addCardPopupWithForm.open());
-
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
-
-// // Close modal with Escape and Click
-// const modals = document.querySelectorAll(".modal");
-
-// function closeModalEsc(evt) {
-//   if (evt.key === "Escape") {
-//     const openedModal = document.querySelector(".modal_opened");
-//     if (openedModal) {
-//       closePopup(openedModal);
-//     }
-//   }
-// }
-
-// modals.forEach((modal) => {
-//   modal.addEventListener("click", (evt) => {
-//     if (evt.target === modal) {
-//       closePopup(modal);
-//     }
-//   });
-// });
-
-const closeButtons = document.querySelectorAll(".modal__close");
-
-// closeButtons.forEach((button) => {
-//   const popup = button.closest(".modal");
-
-//   button.addEventListener("click", () => closePopup(popup));
-// });
 
 //NOTE - Instantiate Popup Classes
 
@@ -211,7 +168,7 @@ const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   subtitleSelector: ".profile__subtitle",
 });
-//userInfo.setUserInfo();
+// userInfo.setUserInfo();
 
 //Section Class
 const section = new Section(
@@ -245,5 +202,3 @@ const popupWithImage = new PopupWithImage(
   ".modal__image",
   ".modal__title"
 );
-
-popupWithImage.setEventListeners();
