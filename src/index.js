@@ -79,10 +79,10 @@ const cardSelector = "#card-template";
 /* ------------------Functions-----------------*/
 /* --------------------------------------------*/
 
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeModalEsc);
-}
+// function closePopup(modal) {
+//   modal.classList.remove("modal_opened");
+//   document.removeEventListener("keydown", closeModalEsc);
+// }
 
 // function openPopup(modal) {
 //   modal.classList.add("modal_opened");
@@ -90,14 +90,8 @@ function closePopup(modal) {
 // }
 
 function handleCardImageClick(name, link) {
-  // set the correct image in the preview image modal
-  previewImageEl.src = link;
-  // set the coorect text in the caption for the image modal
-  previewTitleEl.textContent = name;
-  //set the alt...
-  previewImageEl.alt = name;
-  // open the preview image modal
-  popupWithImage.open();
+  const data = { name, link };
+  popupWithImage.open(data);
 }
 
 /* --------------------------------------------*/
@@ -183,32 +177,32 @@ addNewCardBtn.addEventListener("click", () => addCardPopupWithForm.open());
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 // // Close modal with Escape and Click
-const modals = document.querySelectorAll(".modal");
+// const modals = document.querySelectorAll(".modal");
 
-function closeModalEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closePopup(openedModal);
-    }
-  }
-}
+// function closeModalEsc(evt) {
+//   if (evt.key === "Escape") {
+//     const openedModal = document.querySelector(".modal_opened");
+//     if (openedModal) {
+//       closePopup(openedModal);
+//     }
+//   }
+// }
 
-modals.forEach((modal) => {
-  modal.addEventListener("click", (evt) => {
-    if (evt.target === modal) {
-      closePopup(modal);
-    }
-  });
-});
+// modals.forEach((modal) => {
+//   modal.addEventListener("click", (evt) => {
+//     if (evt.target === modal) {
+//       closePopup(modal);
+//     }
+//   });
+// });
 
 const closeButtons = document.querySelectorAll(".modal__close");
 
-closeButtons.forEach((button) => {
-  const popup = button.closest(".modal");
+// closeButtons.forEach((button) => {
+//   const popup = button.closest(".modal");
 
-  button.addEventListener("click", () => closePopup(popup));
-});
+//   button.addEventListener("click", () => closePopup(popup));
+// });
 
 //NOTE - Instantiate Popup Classes
 
@@ -246,10 +240,10 @@ const editProfilePopupWithForm = new PopupWithForm(
 editProfilePopupWithForm.setEventListeners();
 
 // PopupWithImage
-const popupWithImage = new PopupWithImage({
-  popupSelector: "#preview-image-modal",
-  image: ".card__image",
-  caption: ".card__title",
-});
+const popupWithImage = new PopupWithImage(
+  { popupSelector: "#preview-image-modal" },
+  ".modal__image",
+  ".modal__title"
+);
 
 popupWithImage.setEventListeners();
