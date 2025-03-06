@@ -122,29 +122,22 @@ function renderCard(cardData) {
   cardListEl.prepend(cardElement);
 }
 
-function handleProfileEditSubmit(inputValues) {
-  console.log(inputValues);
-  const { title, subtitle } = inputValues;
+function handleProfileEditSubmit({ title, subtitle }) {
   userInfo.setUserInfo(title, subtitle);
 }
 
+//FIXME - refactor add card
 function handleAddCardSubmit(e) {
-  e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  e.target.reset();
+  // e.target.reset();
   addCardPopupWithForm.close();
   formValidators["add-card"].disableButton();
 }
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
-
-// Form Listeners
-
-editModalForm.addEventListener("submit", (e) => handleProfileEditSubmit());
-addCardModalForm.addEventListener("submit", (e) => handleAddCardSubmit());
 
 // Profile Edit
 profileEditBtn.addEventListener("click", () => {
