@@ -127,14 +127,16 @@ function handleProfileEditSubmit({ title, subtitle }) {
 }
 
 //FIXME - refactor add card
+
 function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  // e.target.reset();
+  e.target.reset();
   addCardPopupWithForm.close();
   formValidators["add-card"].disableButton();
 }
+
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
