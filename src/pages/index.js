@@ -1,11 +1,21 @@
-import "./pages/index.css";
-import "./utils/constants.js";
-import Card from "./components/Card.js";
-import FormValidator from "./components/FormValidator.js";
-import Section from "./components/Section.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import UserInfo from "./components/UserInfo.js";
+import "./index.css";
+import {
+  initialCards,
+  profileEditBtn,
+  addNewCardBtn,
+  cardListEl,
+  profileTitle,
+  profileSubtitle,
+  profileTitleInput,
+  profileSubtitleInput,
+  cardSelector,
+} from "../utils/constants.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/

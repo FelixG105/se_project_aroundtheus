@@ -34,33 +34,30 @@ const initialCards = [
 /* ------------------Elements------------------*/
 /* --------------------------------------------*/
 
-//  Wrappers
-const cardListEl = document.querySelector(".cards__list");
-const profileEditModal = document.querySelector("#edit-modal");
-const addCardModal = document.querySelector("#add-card-modal");
-const editModalForm = document.forms["edit-profile-form"];
-const addCardModalForm = document.forms["add-card-form"];
-
-//  Buttons  and other DOM nodes
+//  Buttons
 const profileEditBtn = document.querySelector("#profile-edit-button");
-const profileModalCloseBtn = profileEditModal.querySelector(".modal__close");
-const addCardModalCloseBtn = addCardModal.querySelector(".modal__close");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 
-// Preview Image Modal
-const previewImageModal = document.querySelector("#preview-image-modal");
-const previewTitleEl = previewImageModal.querySelector(".modal__title");
-const previewImageEl = previewImageModal.querySelector(".modal__image");
-const previewModalCloseBtn = previewImageModal.querySelector(".modal__close");
+// DOM Elements
+
+const cardListEl = document.querySelector(".cards__list");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
 
 // Form Data
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileSubtitleInput = document.querySelector("#profile-subtitle-input");
 
-const cardTitleInput = addCardModalForm.querySelector(
-  ".modal__input_type_title"
-);
-const cardUrlInput = addCardModalForm.querySelector(".modal__input_type_url");
 const cardSelector = "#card-template";
+
+export {
+  initialCards,
+  profileEditBtn,
+  addNewCardBtn,
+  cardListEl,
+  profileTitle,
+  profileSubtitle,
+  profileTitleInput,
+  profileSubtitleInput,
+  cardSelector,
+};
