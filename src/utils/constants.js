@@ -50,6 +50,21 @@ const profileSubtitleInput = document.querySelector("#profile-subtitle-input");
 
 const cardSelector = "#card-template";
 
+/* --------------------------------------------*/
+/* ------------------Validation----------------*/
+/* --------------------------------------------*/
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+  formSelector: ".modal__form",
+};
+
+const formValidators = {};
+
 export {
   initialCards,
   profileEditBtn,
@@ -60,4 +75,6 @@ export {
   profileTitleInput,
   profileSubtitleInput,
   cardSelector,
+  validationSettings,
+  formValidators,
 };

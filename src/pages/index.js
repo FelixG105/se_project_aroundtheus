@@ -9,6 +9,8 @@ import {
   profileTitleInput,
   profileSubtitleInput,
   cardSelector,
+  validationSettings,
+  formValidators,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -20,17 +22,6 @@ import UserInfo from "../components/UserInfo.js";
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
 /* --------------------------------------------*/
-
-const validationSettings = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-  formSelector: ".modal__form",
-};
-
-const formValidators = {};
 
 const enableValidation = (validationSettings) => {
   const formList = document.querySelectorAll(validationSettings.formSelector);
@@ -44,7 +35,6 @@ const enableValidation = (validationSettings) => {
     validator.enableValidation();
   });
 };
-
 enableValidation(validationSettings);
 
 /* --------------------------------------------*/
@@ -73,6 +63,7 @@ function handleProfileEditSubmit({ title, subtitle }) {
 function handleAddCardSubmit(values) {
   renderCard(values, cardListEl);
   addCardPopupWithForm.reset();
+  formValidators["add-card"].disableButton();
   addCardPopupWithForm.close();
 }
 
@@ -91,10 +82,9 @@ profileEditBtn.addEventListener("click", () => {
 // Add New Card Button
 addNewCardBtn.addEventListener("click", () => {
   addCardPopupWithForm.open();
-  formValidators["add-card"].disableButton();
 });
 
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+// initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //NOTE - Instantiate Popup Classes
 
@@ -106,7 +96,7 @@ const userInfo = new UserInfo({
 
 //Section Class
 const section = new Section(
-  { items: initialCards, renderer: () => {} },
+  { items: initialCards, renderer: renderCard },
   ".page__section"
 );
 section.renderItems();
