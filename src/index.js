@@ -128,13 +128,12 @@ function handleProfileEditSubmit({ title, subtitle }) {
 
 //FIXME - refactor add card
 
-function handleAddCardSubmit(e) {
+function handleAddCardSubmit() {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  e.target.reset();
   addCardPopupWithForm.close();
-  formValidators["add-card"].disableButton();
+  // evt.target.reset();
 }
 
 /* --------------------------------------------*/
@@ -150,7 +149,11 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 // Add New Card Button
-addNewCardBtn.addEventListener("click", () => addCardPopupWithForm.open());
+addNewCardBtn.addEventListener("click", () => {
+  addCardPopupWithForm.open();
+  formValidators["add-card"].disableButton();
+});
+
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //NOTE - Instantiate Popup Classes
