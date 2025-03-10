@@ -3,7 +3,6 @@ import {
   initialCards,
   profileEditBtn,
   addNewCardBtn,
-  cardListEl,
   profileTitle,
   profileSubtitle,
   profileTitleInput,
@@ -27,10 +26,8 @@ const enableValidation = (validationSettings) => {
   const formList = document.querySelectorAll(validationSettings.formSelector);
   formList.forEach((formElement) => {
     const validator = new FormValidator(validationSettings, formElement);
-    // Here you get the name of the form (if you don’t have it then you need to add it into each form in `index.html` first)
     const formName = formElement.getAttribute("name");
 
-    // Here you store the validator using the `name` of the form
     formValidators[formName] = validator;
     validator.enableValidation();
   });
@@ -53,8 +50,8 @@ function getCardElement(cardData) {
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-  // section.addItem(cardElement);
+  // cardListEl.prepend(cardElement);
+  section.addItem(cardElement);
 }
 
 function handleProfileEditSubmit({ title, subtitle }) {
@@ -62,9 +59,9 @@ function handleProfileEditSubmit({ title, subtitle }) {
 }
 
 function handleAddCardSubmit(values) {
-  renderCard(values, cardListEl);
-  // const newCard = getCardElement(values)
-  // section.addItem(newCard);
+  // renderCard(values, cardListEl);
+  const newCard = getCardElement(values);
+  section.addItem(newCard);
   addCardPopupWithForm.reset();
   formValidators["add-card"].disableButton();
   addCardPopupWithForm.close();
@@ -100,7 +97,7 @@ const userInfo = new UserInfo({
 //Section Class
 const section = new Section(
   { items: initialCards, renderer: renderCard },
-  ".page__section"
+  ".cards__list"
 );
 section.renderItems();
 

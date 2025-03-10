@@ -39,8 +39,6 @@ const profileEditBtn = document.querySelector("#profile-edit-button");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 
 // DOM Elements
-
-const cardListEl = document.querySelector(".cards__list");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
@@ -69,7 +67,6 @@ export {
   initialCards,
   profileEditBtn,
   addNewCardBtn,
-  cardListEl,
   profileTitle,
   profileSubtitle,
   profileTitleInput,
