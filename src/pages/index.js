@@ -54,6 +54,7 @@ function getCardElement(cardData) {
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
+  // section.addItem(cardElement);
 }
 
 function handleProfileEditSubmit({ title, subtitle }) {
@@ -62,6 +63,8 @@ function handleProfileEditSubmit({ title, subtitle }) {
 
 function handleAddCardSubmit(values) {
   renderCard(values, cardListEl);
+  // const newCard = getCardElement(values)
+  // section.addItem(newCard);
   addCardPopupWithForm.reset();
   formValidators["add-card"].disableButton();
   addCardPopupWithForm.close();
