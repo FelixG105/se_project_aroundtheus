@@ -17,6 +17,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 /* --------------------------------------------*/
 /* ------------------Validation----------------*/
@@ -50,21 +51,33 @@ function getCardElement(cardData) {
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
-  // cardListEl.prepend(cardElement);
   section.addItem(cardElement);
 }
 
 function handleProfileEditSubmit({ title, subtitle }) {
-  userInfo.setUserInfo(title, subtitle);
+  // userInfo.setUserInfo(title, subtitle);
+  api
+    .updateUserInfo(title, subtitle)
+    .then((updatedUser) => {
+      userInfo.setUserInfo(updatedUser.title, updatedUser.subtitle);
+      editProfilePopupWithForm.close();
+    })
+    .catch((err) => console.error("Failed to update profile:", err));
 }
 
-function handleAddCardSubmit(values) {
-  // renderCard(values, cardListEl);
-  const newCard = getCardElement(values);
-  section.addItem(newCard);
-  addCardPopupWithForm.reset();
-  formValidators["add-card"].disableButton();
-  addCardPopupWithForm.close();
+function handleAddCardSubmit({ name, link }) {
+  // const newCard = getCardElement(values);
+  // section.addItem(newCard);
+  api
+    .addNewCard({ name, link })
+    .then((cardData) => {
+      const cardElement = getCardElement(cardData);
+      section.addItem(cardElement);
+      addCardPopupWithForm.reset();
+      formValidators["add-card"].disableButton();
+      addCardPopupWithForm.close();
+    })
+    .catch((err) => console.error("Failed to add card:", err));
 }
 
 /* --------------------------------------------*/
@@ -126,3 +139,26 @@ const popupWithImage = new PopupWithImage(
   ".modal__image",
   ".modal__title"
 );
+popupWithImage.setEventListeners();
+
+/* --------------------------------------------*/
+/* ---------------------API--------------------*/
+/* --------------------------------------------*/
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "6a091442-58c6-459c-bd1b-335f83fe50a7",
+    "Content-Type": "application/json",
+  },
+});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardData]) => {
+    userInfo.setUserInfo(userData.name, userData.about);
+    document.querySelector(".profile__avatar").src = userData.avatar;
+    section.renderItems(cardData);
+    console.log(userData);
+    console.log(cardData);
+  })
+  .catch((err) => console.error(err));
