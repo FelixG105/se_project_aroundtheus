@@ -45,7 +45,15 @@ function handleCardImageClick(name, link) {
 }
 
 function getCardElement(cardData) {
-  const card = new Card(cardData, cardSelector, handleCardImageClick);
+  const card = new Card(
+    cardData,
+    cardSelector,
+    handleCardImageClick,
+    handleDeleteCard,
+    api.likeCard.bind(api),
+    api.deleteLike.bind(api),
+    confirmDeleteCard
+  );
   return card.getView();
 }
 
@@ -66,8 +74,6 @@ function handleProfileEditSubmit({ title, subtitle }) {
 }
 
 function handleAddCardSubmit({ name, link }) {
-  // const newCard = getCardElement(values);
-  // section.addItem(newCard);
   api
     .addNewCard({ name, link })
     .then((cardData) => {
@@ -78,6 +84,16 @@ function handleAddCardSubmit({ name, link }) {
       addCardPopupWithForm.close();
     })
     .catch((err) => console.error("Failed to add card:", err));
+}
+
+function handleDeleteCard(cardId, cardElement) {
+  console.log("Attempting to delete card with ID:", cardId);
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      cardElement.remove();
+    })
+    .catch((err) => console.error("Failed to delete card:", err));
 }
 
 /* --------------------------------------------*/
@@ -107,28 +123,19 @@ const userInfo = new UserInfo({
   subtitleSelector: ".profile__subtitle",
 });
 
-//Section Class
-const section = new Section(
-  { items: initialCards, renderer: renderCard },
-  ".cards__list"
-);
-section.renderItems();
-
 // Popups
 
 //PopupWithForm
 const addCardPopupWithForm = new PopupWithForm(
-  {
-    popupSelector: "#add-card-modal",
-  },
+  "#add-card-modal",
+
   handleAddCardSubmit
 );
 addCardPopupWithForm.setEventListeners();
 
 const editProfilePopupWithForm = new PopupWithForm(
-  {
-    popupSelector: "#edit-modal",
-  },
+  "#edit-modal",
+
   handleProfileEditSubmit
 );
 editProfilePopupWithForm.setEventListeners();
@@ -140,6 +147,12 @@ const popupWithImage = new PopupWithImage(
   ".modal__title"
 );
 popupWithImage.setEventListeners();
+
+const confirmDeleteCard = new PopupWithForm(
+  "#confirm-delete-modal",
+  handleDeleteCard
+);
+confirmDeleteCard.setEventListeners();
 
 /* --------------------------------------------*/
 /* ---------------------API--------------------*/
@@ -153,11 +166,17 @@ const api = new Api({
   },
 });
 
+let section;
+
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
+    section = new Section(
+      { items: cardData, renderer: renderCard },
+      ".cards__list"
+    );
+    section.renderItems();
     userInfo.setUserInfo(userData.name, userData.about);
     document.querySelector(".profile__avatar").src = userData.avatar;
-    section.renderItems(cardData);
     console.log(userData);
     console.log(cardData);
   })
