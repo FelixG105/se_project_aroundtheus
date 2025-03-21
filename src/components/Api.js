@@ -67,8 +67,14 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  updateProfilePicture() {
-    return fetch;
+  updateAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then(this._handleResponse);
   }
 
   // other methods for working with the API

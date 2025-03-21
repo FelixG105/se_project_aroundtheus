@@ -35,6 +35,7 @@ const initialCards = [
 /* --------------------------------------------*/
 
 //  Buttons
+const avatarEditBtn = document.querySelector("#edit-avatar-btn");
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 
@@ -65,6 +66,7 @@ const formValidators = {};
 
 export {
   initialCards,
+  avatarEditBtn,
   profileEditBtn,
   addNewCardBtn,
   profileTitle,

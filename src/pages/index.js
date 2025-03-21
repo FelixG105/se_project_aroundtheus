@@ -1,6 +1,7 @@
 import "./index.css";
 import {
   initialCards,
+  avatarEditBtn,
   profileEditBtn,
   addNewCardBtn,
   profileTitle,
@@ -63,7 +64,6 @@ function renderCard(cardData) {
 }
 
 function handleProfileEditSubmit({ title, subtitle }) {
-  // userInfo.setUserInfo(title, subtitle);
   api
     .updateUserInfo(title, subtitle)
     .then((updatedUser) => {
@@ -96,9 +96,26 @@ function handleDeleteCard(cardId, cardElement) {
     .catch((err) => console.error("Failed to delete card:", err));
 }
 
+function handleEditAvatar({ avatar }) {
+  console.log("Attemping to Edit Avatar:", avatar);
+  api
+    .updateAvatar(avatar)
+    .then((userData) => {
+      userInfo.setUserInfo(userData);
+      editAvatarPopup.close();
+      editAvatarPopup.reset();
+    })
+    .catch((err) => console.error("Failed to update avatar:", err));
+}
+
 /* --------------------------------------------*/
 /* ------------------Event Listeners-----------*/
 /* --------------------------------------------*/
+
+// Edit Avatar
+avatarEditBtn.addEventListener("click", () => {
+  editAvatarPopup.open();
+});
 
 // Profile Edit
 profileEditBtn.addEventListener("click", () => {
@@ -121,6 +138,7 @@ addNewCardBtn.addEventListener("click", () => {
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   subtitleSelector: ".profile__subtitle",
+  avatarSelector: ".profile__avatar",
 });
 
 // Popups
@@ -154,6 +172,12 @@ const confirmDeleteCard = new PopupWithForm(
 );
 confirmDeleteCard.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm(
+  "#edit-avatar-modal",
+  handleEditAvatar
+);
+editAvatarPopup.setEventListeners();
+
 /* --------------------------------------------*/
 /* ---------------------API--------------------*/
 /* --------------------------------------------*/
@@ -175,8 +199,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       ".cards__list"
     );
     section.renderItems();
-    userInfo.setUserInfo(userData.name, userData.about);
-    document.querySelector(".profile__avatar").src = userData.avatar;
+    userInfo.setUserInfo(userData);
     console.log(userData);
     console.log(cardData);
   })
