@@ -1,4 +1,3 @@
-import "dotenv/config";
 import "./index.css";
 import {
   initialCards,
@@ -213,7 +212,7 @@ editAvatarPopup.setEventListeners();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: process.env.AUTH_TOKEN,
+    Authorization: `${process.env.AUTH_TOKEN}`,
     "Content-Type": "application/json",
   },
 });
