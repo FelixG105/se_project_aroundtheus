@@ -13,7 +13,6 @@ class Card {
     this._handleCardImageClick = handleCardImageClick;
     this._cardSelector = cardSelector;
     this._cardId = cardData._id;
-    console.log("Card Data recieved:", cardData);
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeCard = handleLikeCard;
     this._handleDeleteLike = handleDeleteLike;
@@ -35,33 +34,27 @@ class Card {
     });
   }
 
-  _handleDeleteBtnClick(cardId, cardElement) {
-    this._confirmDeletePopup._cardToDelete = { cardId, cardElement };
-    this._confirmDeletePopup.open();
+  _handleDeleteBtnClick() {
+    this._confirmDeletePopup.open({
+      cardId: this._cardId,
+      cardElement: this._cardElement,
+    });
   }
 
   _handleLikeIcon() {
     if (this._isLiked) {
-      console.log("Attempting to unlike card with ID:", this._cardId);
       this._handleDeleteLike(this._cardId)
         .then((res) => {
-          console.log("Unlike Response:", res);
           this._likeButton.classList.remove("card__like-button_active");
-          this._likeCounter.textContent = res.isLiked ? 1 : 0;
+          this._likeCounter.textContent = res.isLiked ? 1 : "";
           this._isLiked = false;
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("Attempting to like card with ID:", this._cardId);
       this._handleLikeCard(this._cardId)
         .then((res) => {
-          console.log("Like Response:", {
-            response: res,
-            type: typeof res,
-            keys: Object.keys(res),
-          });
           this._likeButton.classList.add("card__like-button_active");
-          this._likeCounter.textContent = res.isLiked ? 1 : 0;
+          this._likeCounter.textContent = res.isLiked ? 1 : "";
           this._isLiked = true;
         })
         .catch((err) => console.error(err));

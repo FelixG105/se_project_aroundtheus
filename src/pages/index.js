@@ -64,6 +64,7 @@ function renderCard(cardData) {
 }
 
 function handleProfileEditSubmit({ title, subtitle }) {
+  editProfilePopupWithForm.renderLoading(true);
   api
     .updateUserInfo(title, subtitle)
     .then((updatedUser) => {
@@ -73,11 +74,16 @@ function handleProfileEditSubmit({ title, subtitle }) {
         avatar: userInfo.getUserInfo().avatar,
       });
       editProfilePopupWithForm.close();
+      editProfilePopupWithForm.renderLoading(false);
     })
-    .catch((err) => console.error("Failed to update profile:", err));
+    .catch((err) => {
+      console.error("Failed to update profile:", err);
+      editProfilePopupWithForm.renderLoading(false);
+    });
 }
 
 function handleAddCardSubmit({ name, link }) {
+  addCardPopupWithForm.renderLoading(true);
   api
     .addNewCard({ name, link })
     .then((cardData) => {
@@ -86,22 +92,31 @@ function handleAddCardSubmit({ name, link }) {
       addCardPopupWithForm.reset();
       formValidators["add-card"].disableButton();
       addCardPopupWithForm.close();
+      addCardPopupWithForm.renderLoading(false);
     })
-    .catch((err) => console.error("Failed to add card:", err));
+    .catch((err) => {
+      console.error("Failed to add card:", err);
+      addCardPopupWithForm.renderLoading(false);
+    });
 }
 
 function handleDeleteCard(cardId, cardElement) {
-  console.log("Attempting to delete card with ID:", cardId);
+  confirmDeleteCard.renderLoading(true);
   api
     .deleteCard(cardId)
     .then(() => {
       cardElement.remove();
+      confirmDeleteCard.close();
+      confirmDeleteCard.renderLoading(false);
     })
-    .catch((err) => console.error("Failed to delete card:", err));
+    .catch((err) => {
+      console.error("Failed to delete card:", err);
+      confirmDeleteCard.renderLoading(false);
+    });
 }
 
 function handleEditAvatar({ avatar }) {
-  console.log("Attemping to Edit Avatar:", avatar);
+  editAvatarPopup.renderLoading(true);
   api
     .updateAvatar(avatar)
     .then((userData) => {
@@ -111,9 +126,13 @@ function handleEditAvatar({ avatar }) {
         avatar: userData.avatar,
       });
       editAvatarPopup.close();
+      editAvatarPopup.renderLoading(false);
       editAvatarPopup.reset();
     })
-    .catch((err) => console.error("Failed to update avatar:", err));
+    .catch((err) => {
+      console.error("Failed to update avatar:", err);
+      editAvatarPopup.renderLoading(false);
+    });
 }
 
 /* --------------------------------------------*/
@@ -198,17 +217,21 @@ const api = new Api({
   },
 });
 
+// Section variable declaration - initialized after API data is loaded
 let section;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
+    // Initialize section with card data from the API
     section = new Section(
       { items: cardData, renderer: renderCard },
       ".cards__list"
     );
     section.renderItems();
-    userInfo.setUserInfo(userData);
-    console.log(userData);
-    console.log(cardData);
+    userInfo.setUserInfo({
+      title: userData.name,
+      subtitle: userData.about,
+      avatar: userData.avatar,
+    });
   })
   .catch((err) => console.error(err));
