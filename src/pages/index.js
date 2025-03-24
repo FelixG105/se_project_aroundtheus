@@ -67,7 +67,11 @@ function handleProfileEditSubmit({ title, subtitle }) {
   api
     .updateUserInfo(title, subtitle)
     .then((updatedUser) => {
-      userInfo.setUserInfo(updatedUser.title, updatedUser.subtitle);
+      userInfo.setUserInfo({
+        title: updatedUser.name,
+        subtitle: updatedUser.about,
+        avatar: userInfo.getUserInfo().avatar,
+      });
       editProfilePopupWithForm.close();
     })
     .catch((err) => console.error("Failed to update profile:", err));
@@ -101,7 +105,11 @@ function handleEditAvatar({ avatar }) {
   api
     .updateAvatar(avatar)
     .then((userData) => {
-      userInfo.setUserInfo(userData);
+      userInfo.setUserInfo({
+        title: userData.name,
+        subtitle: userData.about,
+        avatar: userData.avatar,
+      });
       editAvatarPopup.close();
       editAvatarPopup.reset();
     })

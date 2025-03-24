@@ -24,13 +24,13 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  updateUserInfo() {
+  updateUserInfo(title, subtitle) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        title: "Marie Skłodowska Curie",
-        subtitle: "Physicist and Chemist",
+        name: title,
+        about: subtitle,
       }),
     }).then(this._handleResponse);
   }
