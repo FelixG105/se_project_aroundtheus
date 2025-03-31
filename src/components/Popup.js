@@ -41,7 +41,6 @@ export default class Popup {
   }
 
   _handleButtonClose() {
-    console.log("button clicked");
     this.close();
   }
 
