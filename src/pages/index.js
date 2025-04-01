@@ -212,7 +212,7 @@ editAvatarPopup.setEventListeners();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    Authorization: `${process.env.AUTH_TOKEN}`,
+    Authorization: "d8006e48-84bc-4f5e-ac9d-e1c5356a3843",
     "Content-Type": "application/json",
   },
 });
