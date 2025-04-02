@@ -74,10 +74,11 @@ function handleProfileEditSubmit({ title, subtitle }) {
         avatar: userInfo.getUserInfo().avatar,
       });
       editProfilePopupWithForm.close();
-      editProfilePopupWithForm.renderLoading(false);
     })
     .catch((err) => {
       console.error("Failed to update profile:", err);
+    })
+    .finally(() => {
       editProfilePopupWithForm.renderLoading(false);
     });
 }
@@ -92,10 +93,11 @@ function handleAddCardSubmit({ name, link }) {
       addCardPopupWithForm.reset();
       formValidators["add-card"].disableButton();
       addCardPopupWithForm.close();
-      addCardPopupWithForm.renderLoading(false);
     })
     .catch((err) => {
       console.error("Failed to add card:", err);
+    })
+    .finally(() => {
       addCardPopupWithForm.renderLoading(false);
     });
 }
@@ -107,10 +109,11 @@ function handleDeleteCard(cardId, cardElement) {
     .then(() => {
       cardElement.remove();
       confirmDeleteCard.close();
-      confirmDeleteCard.renderLoading(false);
     })
     .catch((err) => {
       console.error("Failed to delete card:", err);
+    })
+    .finally(() => {
       confirmDeleteCard.renderLoading(false);
     });
 }
@@ -126,11 +129,13 @@ function handleEditAvatar({ avatar }) {
         avatar: userData.avatar,
       });
       editAvatarPopup.close();
-      editAvatarPopup.renderLoading(false);
       editAvatarPopup.reset();
+      formValidators["edit-avatar"].disableButton();
     })
     .catch((err) => {
       console.error("Failed to update avatar:", err);
+    })
+    .finally(() => {
       editAvatarPopup.renderLoading(false);
     });
 }
@@ -156,8 +161,6 @@ profileEditBtn.addEventListener("click", () => {
 addNewCardBtn.addEventListener("click", () => {
   addCardPopupWithForm.open();
 });
-
-// initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //NOTE - Instantiate Popup Classes
 

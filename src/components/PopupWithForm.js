@@ -18,17 +18,9 @@ export default class PopupWithForm extends Popup {
     return inputObj;
   }
 
-  open(cardData) {
+  open({ cardId, cardElement }) {
     super.open();
-    if (this._popupElement.id === "confirm-delete-modal") {
-      this._cardToDelete = cardData;
-
-      // Find and focus the submit/confirm button
-      const submitButton = this._popupForm.querySelector(".modal__submit");
-      if (submitButton) {
-        submitButton.focus();
-      }
-    }
+    this._cardToDelete = { cardId, cardElement };
   }
 
   renderLoading(isLoading) {
@@ -48,13 +40,11 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      if (this._popupElement.id === "confirm-delete-modal") {
+      if (this._cardToDelete) {
         const { cardId, cardElement } = this._cardToDelete;
-
         this._handleFormSubmit(cardId, cardElement);
       } else {
         const inputValues = this._getInputValues();
-
         this._handleFormSubmit(inputValues);
       }
     });
