@@ -53,7 +53,8 @@ function getCardElement(cardData) {
     handleDeleteCard,
     api.likeCard.bind(api),
     api.deleteLike.bind(api),
-    confirmDeleteCard
+    confirmDeleteCard,
+    userId
   );
   return card.getView();
 }
@@ -224,9 +225,13 @@ const api = new Api({
 
 // Section variable declaration - initialized after API data is loaded
 let section;
+let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
+    console.log("Initial cards data:", cardData);
+    // Store the user ID
+    userId = userData._id;
     // Initialize section with card data from the API
     section = new Section(
       { items: cardData, renderer: renderCard },
