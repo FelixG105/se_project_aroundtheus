@@ -47,22 +47,16 @@ class Card {
   _handleLikeIcon() {
     if (this._isLiked) {
       this._handleDeleteLike(this._cardId)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this._likeButton.classList.remove("card__like-button_active");
-          // this._likes.push(this._userId);
-          this._likeCounter.textContent =
-            this._likes.length > 0 ? this._likes.length : "";
+
           this._isLiked = false;
         })
         .catch((err) => console.log(err));
     } else {
       this._handleLikeCard(this._cardId)
-        .then((res) => {
+        .then(() => {
           this._likeButton.classList.add("card__like-button_active");
-          this._likes.push(this._userId);
-          this._likeCounter.textContent =
-            this._likes.length > 0 ? this._likes.length : "";
 
           this._isLiked = true;
         })

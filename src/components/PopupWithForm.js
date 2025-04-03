@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._inputs = this._popupForm.querySelectorAll(".modal__input");
     this._handleFormSubmit = handleFormSubmit;
     this._popupSubmit = this._popupForm.querySelector(".modal__submit");
+    this._submitBtnText = this._popupSubmit.textContent;
   }
 
   _getInputValues() {
@@ -18,16 +19,20 @@ export default class PopupWithForm extends Popup {
     return inputObj;
   }
 
-  open({ cardId, cardElement }) {
+  open(data) {
     super.open();
-    this._cardToDelete = { cardId, cardElement };
+    this._data = data;
+    // // Find and focus the submit/confirm button
+    if (this._popupSubmit) {
+      this._popupSubmit.focus();
+    }
   }
 
-  renderLoading(isLoading) {
-    if (isLoading === true) {
-      this._popupSubmit.textContent = "Saving...";
+  renderLoading(isLoading, loadingText = "Saving...") {
+    if (isLoading) {
+      this._popupSubmit.textContent = loadingText;
     } else {
-      this._popupSubmit.textContent = "Save";
+      this._popupSubmit.textContent = this._submitBtnText;
     }
   }
 
@@ -40,11 +45,11 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      if (this._cardToDelete) {
-        const { cardId, cardElement } = this._cardToDelete;
-        this._handleFormSubmit(cardId, cardElement);
+      if (this._data) {
+        this._handleFormSubmit(this._data);
       } else {
         const inputValues = this._getInputValues();
+
         this._handleFormSubmit(inputValues);
       }
     });

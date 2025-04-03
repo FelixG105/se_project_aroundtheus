@@ -102,7 +102,7 @@ function handleAddCardSubmit({ name, link }) {
     });
 }
 
-function handleDeleteCard(cardId, cardElement) {
+function handleDeleteCard({ cardId, cardElement }) {
   confirmDeleteCard.renderLoading(true);
   api
     .deleteCard(cardId)
@@ -161,6 +161,8 @@ profileEditBtn.addEventListener("click", () => {
 addNewCardBtn.addEventListener("click", () => {
   addCardPopupWithForm.open();
 });
+
+// initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //NOTE - Instantiate Popup Classes
 
