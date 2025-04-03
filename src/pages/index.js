@@ -61,6 +61,12 @@ function getCardElement(cardData) {
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
+  const likeButton = cardElement.querySelector(".card__like-button");
+  if (cardData.isLiked) {
+    likeButton.classList.add("card__like-button_active");
+  } else {
+    likeButton.classList.remove("card__like-button_active");
+  }
   section.addItem(cardElement);
 }
 

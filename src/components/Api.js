@@ -15,6 +15,9 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
+      // body: JSON.stringify({
+      //   likes: likes,
+      // }),
     }).then(this._handleResponse);
   }
 
