@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.profile__avatar-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-right: 24px;
+  cursor: pointer;
+}
+
 .profile__avatar {
   width: 120px;
   height: 120px;
@@ -11,6 +19,24 @@
   background-position: center;
   object-fit: cover;
   margin-right: 24px;
+}
+
+.profile__edit_avatar-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile__avatar-container:hover .profile__avatar {
+  opacity: 0.2;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile__avatar-container:hover .profile__edit_avatar-icon {
+  opacity: 1;
 }
 
 .profile__info {
